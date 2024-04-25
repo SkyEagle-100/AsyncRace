@@ -122,9 +122,9 @@ function App() {
           <div className="header-panel-left-div">
 
             <div className="create-car-div">
-              <div>
-                <input value={createCarName} onChange={e => setCreateCarName(e.target.value)} placeholder='Add car name'></input>
-                <input type='color' value={createCarColor} onChange={e => setCreateCarColor(e.target.value)}></input>
+              <div className='header-inputs'>
+                <input className="name-input" value={createCarName} onChange={e => setCreateCarName(e.target.value)} placeholder='Add car name'></input>
+                <input className='color-input' type='color' value={createCarColor} onChange={e => setCreateCarColor(e.target.value)}></input>
               </div>
             <button onClick={handleOnCreateCarClick}>Create Car</button>
             </div>
@@ -179,9 +179,11 @@ function App() {
                   </>
         })}
       </div>
-      <button onClick={() => setCurrentPage(currentPage - 1)} disabled={currentPage === 1}>Previous</button>
-      <button onClick={() => setCurrentPage(currentPage + 1)} disabled={paginatedCars.length < 7 || currentPage * 7 === cars.length}>Next</button>
-      Current Page: {currentPage}
+      <div className='pagination-panel'>
+        <button onClick={() => setCurrentPage(currentPage - 1)} disabled={currentPage === 1}>Previous</button>
+        {currentPage}
+        <button onClick={() => setCurrentPage(currentPage + 1)} disabled={paginatedCars.length < 7 || currentPage * 7 === cars.length}>Next</button>
+      </div>
     </div>
   );
 }
