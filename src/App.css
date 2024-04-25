@@ -1,38 +1,150 @@
-.App {
-  text-align: center;
+.container{
+  width: calc(500px + (1000 - 500) * ((100vw - 500px) / (1440 - 500)));;
+  height: 100vh;
+  margin-left: auto;
+  margin-right: auto;
+  background-color: #161616;
+  color: white
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
+.road{
+  position: relative;
+  width: 100%;
+  height: 100px;
+  /* background-color: gainsboro; */
+  &:not(:first-child){
+  border-top: white 1px solid;
   }
+
+}
+.race-way{
+  width: calc(100% - 128px - 50px);
+  position: absolute;  
+  left: 50px;
+  height: 100px;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.car-name{
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%,-50%);
+  color: white;
+  font-size: 32px;
+  text-shadow: 0 0 10px 5px white;
+
+}
+.finish {
+  display: flex; /* Используем flexbox для центрирования содержимого */
+  justify-content: center; /* Центрируем содержимое по горизонтали */
+  align-items: center; /* Центрируем содержимое по вертикали */
+  box-sizing: border-box;
+  width: 128px;
+  height: 100px;
+  margin-left: auto;
+  border-right: white 10px solid;
+}
+
+.finish-text {
+  transform: rotate(90deg); /* Поворачиваем текст */
+  text-align: center; /* Выравниваем текст по центру */
+  color: white; /* Цвет текста */
+  font-size: 24px;
+}
+.car{
+  width: 128px;
+  height: max-content;
+  display: flex;
+  position: absolute; /* Чтобы анимация происходила корректно */
+  top: 50%; /* Расположение элемента в центре по вертикали */
+  transform: translateY(-50%);
+  /* left: -128px; Начальное положение машинок */
+  animation-name: moveRight;
+}
+
+.car-buttons{
+  position: absolute;
+  height: 100%;
+  width: 50px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  justify-content: space-around;
 }
 
-.App-link {
-  color: #61dafb;
+.car-buttons button{
+  width: 25px;
+  height: 25px;
+  
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+@keyframes moveRight {
+  from { left: 0; }
+  to { left: 100%; }
+}
+
+.cars-amount-text{
+    margin: 0;
+    font-size: 72px;
+      
+}
+
+.total-cars-text{
+  text-align: center;
+}
+
+.cars-amount{
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.header-panel{
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.header-panel button{
+  border: 2px solid;
+  border-radius: 8px;
+  font-size: 14px;
+  height: 30px;
+  min-width: 70px;
+  width: max-content;
+}
+
+.header-panel-right-div{
+  width: 45%;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.header-panel-left-div{
+  width: 45%;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+
+
+.create-car-div{
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-direction: column;
+  height: 100%;
+}
+
+.create-car-div input{
+}
+
+.__green-button{
+  color: rgb(62, 221, 70);
+  border: green;
+  box-shadow: green;
 }
