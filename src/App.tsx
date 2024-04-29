@@ -3,7 +3,7 @@ import './App.css';
 import { createCar, createWinner, engineMode, getAllCars, getAllWinners, getCarById, removeCar, removeWinner, updateWinner} from './service/service';
 import { ICar, IRaceWinner, IWinner } from './interfaces';
 import Car from './components/Car/Car';
-import { calcDuration, checkDrive, generateRandomCars, moveCarById, setMoveAnimation, stopAnimation } from './service/localService';
+import { calcDuration, checkDrive, generateRandomCars, makeDriveButtonId, makeStopButtonId, moveCarById, setMoveAnimation, stopAnimation } from './service/localService';
 import WinnersPage from './components/Winners/Winners';
 import axios from 'axios';
 import { engineStatus } from './values';
@@ -24,6 +24,7 @@ function App() {
   const [showWinnerInfo, setShowWinnerInfo] = useState(false)
   const [showEditModal, setShowEditModal] = useState(false)
   const [carToEdit, setCarToEdit] = useState<ICar>()
+  const [raceOn, setRaceOn] = useState(false)
 
   useEffect(() => {
     fetchCars();
@@ -76,39 +77,22 @@ function App() {
 
   const handleOnGenerateClick = async () => {
     generateRandomCars()
-    fetchCars()
+    setTimeout(() => {
+      fetchCars()  
+    }, 1000)
   }
 
-  const handleOnRemoveButtonClick = async (id: number) => {
-      await removeCar(id)
-      if(winnersList.find(w => w.id === id)){
-        await removeWinner(id)
-        fetchWinners()   
-      }
-      fetchCars()
+  
+
+  const handleOnRaceButtonClick = () => {
+    setRaceOn(true)
+    moveCarsById(paginatedCars, setRaceWinner, setRaceOn)
   }
 
-  const handleOnEditButtonClick = async (id: number) => { 
-      const car = await getCarById(id)
-      setCarToEdit(car)
-      setShowEditModal(true)
-  }
-
-  const handleOnDriveButtonClick = async (id : number) => {
-    moveCarById(id)
-
-  }
-
-  const handleOnStopButtonClick = async (id: number) => {
-    const car = document.getElementById(id+"")
-    if(car){
-    car.style.animationPlayState = 'paused'; // Приостанавливаем анимацию
-    car.style.animationName = "none"
-    }
-    engineMode(id, engineStatus.STOPPED)
-  }
+  
 
   const handleResetButtonClick  = () => {
+    setRaceOn(false)
     stopAnimation()
   }
 
@@ -130,7 +114,7 @@ function App() {
             <button onClick={handleOnGenerateClick}>Generate 100 cars</button>
           </div>
           <div className="header-panel-right-div">
-            <button className='__green-button' onClick={() => moveCarsById(paginatedCars, setRaceWinner)}>RACE</button>
+            <button disabled={raceOn} className={`__green-button ${raceOn && "disabled-button"}`} onClick={handleOnRaceButtonClick}>RACE</button>
             <button onClick={() => handleResetButtonClick()}>Reset</button>
           <button className="winners-button"onClick={() => setShowWinnersPage(true)}>Winners</button>
           </div>
@@ -152,16 +136,11 @@ function App() {
         {paginatedCars?.map((el, i) => {
             return <>
                   <div className="road">
+                  
                     <div className="race-way">
-                      <div id={`${el.id}`} key={i} className='car'>
-                        <Car color={el.color}/>
-                      </div>
-                    </div>
-                    <div className="car-buttons">
-                      <button onClick={() => handleOnEditButtonClick(el.id)}>E</button>
-                      <button onClick={() => handleOnRemoveButtonClick(el.id)}>R</button>
-                      <button onClick={() => handleOnDriveButtonClick(el.id)}>D</button>
-                      <button onClick={() => handleOnStopButtonClick(el.id)}>S</button>
+                    <Car color={el.color} raceOn={raceOn} id={el.id} 
+                              setCarToEdit={setCarToEdit} setShowEditModal={setShowEditModal} fetchCars={fetchCars} 
+                              winnersList={winnersList} fetchWinners={fetchWinners}/>
                     </div>
                     <div className='car-name'>
                       {el.name}
@@ -187,7 +166,7 @@ function App() {
 
 export default App;
 
-async function moveCarsById(cars: ICar[], setRaceWinner: Dispatch<SetStateAction<IRaceWinner | null>>){
+async function moveCarsById(cars: ICar[], setRaceWinner: Dispatch<SetStateAction<IRaceWinner | null>>, setRaceOn: Dispatch<SetStateAction<boolean>>){
     stopAnimation()
     let startTime: number;
     let winnerId: number | null = null; // Идентификатор победителя
@@ -201,6 +180,7 @@ async function moveCarsById(cars: ICar[], setRaceWinner: Dispatch<SetStateAction
       calcDuration(el.velocity)
       if(carDiv){
         carDiv.addEventListener('animationend', () => {
+          setRaceOn(false)
           if(!winnerId){
             const time = (performance.now() - startTime)
             winnerId = el.id

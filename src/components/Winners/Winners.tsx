@@ -3,7 +3,7 @@ import "./winners.css"
 import { ICar, IWinner, IWinnerFullInfo } from "../../interfaces"
 import { sortWinners } from "../../service/service"
 import { makeWinnersFullInfoList } from "../../service/localService"
-import Car from "../Car/Car"
+import Car, { CarSVG } from "../Car/Car"
 import { sortValues } from "../../values"
 
 interface IWinnersPageProps {
@@ -80,7 +80,7 @@ const WinnersPage:FC<IWinnersPageProps> = ({show, setShow, winners, cars}) => {
                             <td>{el.id}</td>
                             <td>
                                 <div className="winners-table-car">
-                                    <Car color={el.color}></Car>
+                                    <CarSVG color={el.color}></CarSVG>
                                 </div>
                             </td>
                             <td>{el.name}</td>

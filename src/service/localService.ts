@@ -1,8 +1,9 @@
+import { Dispatch, SetStateAction } from "react";
 import { ICar, IWinner, IWinnerFullInfo } from "../interfaces";
 import { carBrands, carModels, engineStatus } from "../values";
 import { createCar, engineMode } from "./service";
 
-export const generateRandomCars = (amount: number = 100) => {
+export const generateRandomCars = async (amount: number = 100) => {
     let i = 1;
     while(i <= amount){
         const brandIndex = Math.floor(Math.random() * carBrands.length);
@@ -34,24 +35,21 @@ export const setMoveAnimation = (carDiv : HTMLElement,duration: number) => {
   carDiv.style.animationPlayState = 'running'; 
 }
 
-export const moveCarById = async (id: number) => {
-  
+export const moveCarById = async (id: number, setIsMoving: Dispatch<SetStateAction<boolean>>) => {  
     const car = document.getElementById(id+"")
-    
-    
     if(car){
-      car.style.animationPlayState = 'paused'; // Приостанавливаем анимацию
-      car.style.animationName = "none"
+      car.style.animationName = 'none'
       car.addEventListener('animationend', () => {
+      setIsMoving(false)
       car.style.animationPlayState = 'paused'; // Приостанавливаем анимацию
-        car.style.animationName = 'none';
+      car.style.animationName = 'none';
       }); 
-     const {velocity} = await engineMode(id, engineStatus.STARTED)
-     setMoveAnimation(car, calcDuration(velocity))
-     checkDriveById(id)
-    }
+    const {velocity} = await engineMode(id, engineStatus.STARTED)
+    setMoveAnimation(car, calcDuration(velocity))
+    setIsMoving(true)
+    checkDriveById(id, setIsMoving)
+  }
 }
-
 
 export const calcDuration = (velocity: number, distance: number = 100): number => {
       return (distance /(velocity * 2)) * 10;
@@ -82,13 +80,26 @@ export const checkDrive = async (cars : ICar[]) => {
 }
 
 
-export const checkDriveById = async(id: number) => {
+export const checkDriveById = async(id: number, setIsMoving: Dispatch<SetStateAction<boolean>>) => {
     const res = await engineMode(id, engineStatus.DRIVE)
     if(res === 500){
+      setIsMoving(false)
       const div = document.getElementById(id+"")
         if(div)
           div.style.animationPlayState = 'paused';
           engineMode(id, engineStatus.STOPPED)          
         }
+
     }
+
+
+export const makeDriveButtonId = (id : number) => {
+  return "driveButton" + id
+}
+
+export const makeStopButtonId = (id : number) => {
+  return "stopButton" + id
+}
+
+
 

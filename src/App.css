@@ -55,37 +55,14 @@
   color: white; /* Цвет текста */
   font-size: 24px;
 }
-.car{
-  width: 128px;
-  height: max-content;
-  display: flex;
-  position: absolute; /* Чтобы анимация происходила корректно */
-  top: 50%; /* Расположение элемента в центре по вертикали */
-  transform: translateY(-50%);
-  /* left: -128px; Начальное положение машинок */
-  animation-name: moveRight;
-}
 
-.car-buttons{
-  position: absolute;
-  height: 100%;
-  width: 50px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-around;
-}
 
-.car-buttons button{
-  width: 25px;
-  height: 25px;
+.disabled-button{
   
+  opacity: 0.3;
+  cursor:not-allowed
 }
 
-@keyframes moveRight {
-  from { left: 0; }
-  to { left: 100%; }
-}
 
 .cars-amount-text{
     margin: 0;
@@ -192,3 +169,4 @@
   border-radius: 8px;
   border: 2px solid white;
 }
+

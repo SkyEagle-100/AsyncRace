@@ -3,7 +3,7 @@ import { ICar, IRaceWinner, IWinner } from "../../interfaces"
 
 import "./winnerInfo.css"
 import { getCarById } from "../../service/service"
-import Car from "../Car/Car"
+import Car, { CarSVG } from "../Car/Car"
 
 interface IWinnerInfoWindowProps {
     winner: IRaceWinner,
@@ -23,7 +23,7 @@ const WinnerInfoWindow:FC<IWinnerInfoWindowProps> = ({winner, setShow}) => {
                 <div className="winner-info-header">
                 {car.name} WINS!!!
                 </div>
-                <Car color={car.color}></Car>
+                <CarSVG color={car.color}></CarSVG>
                 <div className="winner-info-time">
                     Time: {winner.time}s
                 </div>

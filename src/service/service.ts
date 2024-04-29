@@ -1,7 +1,6 @@
 import axios, { AxiosError } from "axios"
-import { engineStatus, serverUrl } from "../values"
+import { serverUrl } from "../values"
 import { ICar, ISortWinnerData, IWinner } from "../interfaces"
-import { ifError } from "assert"
 
 export const getAllCars = async (): Promise<ICar[]> => {
     let cars: ICar[] = []
@@ -31,7 +30,7 @@ export const removeCar = async (id: number) => {
 }
 
 export const editCar = async (car: ICar) => {
-    axios.put(`${serverUrl}/garage/${car.id}`,car,{
+    await axios.put(`${serverUrl}/garage/${car.id}`,car,{
         headers: {
             "Content-Type" : "application/json"
         }

@@ -1,9 +1,8 @@
 import { Dispatch, FC, SetStateAction, useEffect, useState } from "react";
-import { deflate } from "zlib"
 import "./editWindow.css"
 import { ICar } from "../../interfaces";
-import Car from "../Car/Car";
-import { editCar, getCarById } from "../../service/service";
+import Car, { CarSVG } from "../Car/Car";
+import { editCar } from "../../service/service";
 interface IEditModalProps {
     setShow: Dispatch<SetStateAction<boolean>>,
     car: ICar,
@@ -25,7 +24,7 @@ const EditWindow:FC<IEditModalProps> = ({setShow,car, fetchCars}) => {
         <div onClick={() => setShow(false)}className="modal-wrapper">
             <div onClick={e => e.stopPropagation()} className="edit-modal">
                 <div>Edit Car</div>
-                <Car color={color}></Car>
+                <CarSVG color={color}></CarSVG>
                 <input onChange={(e) => setColor(e.target.value)} type="color" placeholder="Pick a new color"/>
                 <input value={name} onChange={e => setName(e.target.value)}/>
                 <button onClick={handleOnSubmitButtonClick}>Submit</button>
