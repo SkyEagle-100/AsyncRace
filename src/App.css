@@ -4,20 +4,18 @@
   margin-left: auto;
   margin-right: auto;
   background-color: #161616;
-  color: white
+  color: white;
+  font-family: 'Poppins';
 }
 
 .road{
   position: relative;
   width: 100%;
   height: 100px;
-  /* background-color: gainsboro; */
   &:not(:first-child){
-  border-top: white 1px solid;
-  box-sizing: border-box;
-  
+      border-top: white 1px solid;
+      box-sizing: border-box;
   }
-
 }
 .race-way{
   width: calc(100% - 128px - 50px);
@@ -97,6 +95,7 @@
 
 .total-cars-text{
   text-align: center;
+  border-bottom: 1px solid white;
 }
 
 .cars-amount{
@@ -104,6 +103,8 @@
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
 }
 
 .header-panel{
@@ -118,7 +119,7 @@
   border-radius: 8px;
   font-size: 14px;
   height: 30px;
-  min-width: 70px;
+  min-width: 90px;
   width: max-content;
 }
 
@@ -142,18 +143,27 @@
   display: flex;
   justify-content: space-around;
   align-items: center;
-  flex-direction: column;
+  /* flex-direction: column; */
   height: 100%;
 }
 
 .name-input{
-  height: 25px;
+  padding-left: 10px;
+  outline:0;
+  border-radius: 8px;
+  border: 0;
   margin-right: 10px;
-  outline: 0  ;
+  height: 25px;
+
 }
 
 .color-input{
   height: 30px;
+  box-sizing: border-box  ;
+  width: 30px;
+  outline: none;
+  background-color: transparent;
+  border: none;
 }
 
 .header-inputs{
@@ -178,5 +188,7 @@
 
 .pagination-panel button {
   height: 30px;
-  width: 70px;
+  width: 90px;
+  border-radius: 8px;
+  border: 2px solid white;
 }

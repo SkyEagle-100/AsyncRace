@@ -31,4 +31,13 @@ export interface IVelocity{
 }
 
 
+export interface ISortWinnerData{
+    sort: string,
+    order: string
+}
+
+
+export interface CarModels {
+    [brand: string]: string[];
+}
 

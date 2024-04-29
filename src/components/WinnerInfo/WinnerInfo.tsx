@@ -20,11 +20,12 @@ const WinnerInfoWindow:FC<IWinnerInfoWindowProps> = ({winner, setShow}) => {
     return(
         <div onClick={() => setShow(false)}className="modal-wrapper">
             {car && <div className="winner-info">
-                {winner.id}
-                <div>
-                    {winner.time}
-                    {car.name}
-                    <Car color={car.color}></Car>
+                <div className="winner-info-header">
+                {car.name} WINS!!!
+                </div>
+                <Car color={car.color}></Car>
+                <div className="winner-info-time">
+                    Time: {winner.time}s
                 </div>
             </div>
             }

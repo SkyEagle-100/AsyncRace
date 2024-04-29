@@ -1,7 +1,8 @@
-export const serverUrl = "http://localhost:3001"
-interface CarModels {
-    [brand: string]: string[];
-}
+import { CarModels } from "./interfaces";
+
+export const serverUrl = "http://127.0.0.1:3000"
+
+
 export const carBrands = ["Tesla", "Ford", "Chevrolet", "Toyota", "Honda", "BMW", "Mercedes", "Audi", "Nissan", "Volvo"];
 export const carModels: CarModels = {
     "Tesla": ["Model S", "Model 3", "Model X", "Model Y"],
@@ -21,4 +22,11 @@ export const engineStatus ={
     STARTED : 'started',
     STOPPED : 'stopped',
     DRIVE : 'drive'
+}
+
+export const sortValues = {
+    winsASC: "wins ASC",
+    winsDESC: "wins DESC",
+    timeASC: "time ASC",
+    timeDESC : "time DESC"
 }

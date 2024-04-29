@@ -1,6 +1,6 @@
 import axios, { AxiosError } from "axios"
 import { engineStatus, serverUrl } from "../values"
-import { ICar, IWinner } from "../interfaces"
+import { ICar, ISortWinnerData, IWinner } from "../interfaces"
 import { ifError } from "assert"
 
 export const getAllCars = async (): Promise<ICar[]> => {
@@ -74,4 +74,12 @@ export const updateWinner = async(data: IWinner) => {
 
 export const removeWinner = async(id: number) => {
     axios.delete(`${serverUrl}/winners/${id}`)
+}
+
+export const sortWinners = async (data: ISortWinnerData): Promise<IWinner[]> => {
+    const res:IWinner[] = await axios.get(`${serverUrl}/winners?_sort=${data.sort}&_order=${data.order}`)
+                .then(response => {
+                    return response.data
+                })
+    return res
 }

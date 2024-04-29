@@ -24,6 +24,7 @@ const EditWindow:FC<IEditModalProps> = ({setShow,car, fetchCars}) => {
     return(
         <div onClick={() => setShow(false)}className="modal-wrapper">
             <div onClick={e => e.stopPropagation()} className="edit-modal">
+                <div>Edit Car</div>
                 <Car color={color}></Car>
                 <input onChange={(e) => setColor(e.target.value)} type="color" placeholder="Pick a new color"/>
                 <input value={name} onChange={e => setName(e.target.value)}/>

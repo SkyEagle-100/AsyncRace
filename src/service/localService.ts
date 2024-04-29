@@ -1,3 +1,4 @@
+import { ICar, IWinner, IWinnerFullInfo } from "../interfaces";
 import { carBrands, carModels, engineStatus } from "../values";
 import { createCar, engineMode } from "./service";
 
@@ -37,15 +38,17 @@ export const moveCarById = async (id: number) => {
   
     const car = document.getElementById(id+"")
     
-    const {velocity} = await engineMode(id, engineStatus.STARTED)
     
     if(car){
       car.style.animationPlayState = 'paused'; // Приостанавливаем анимацию
       car.style.animationName = "none"
       car.addEventListener('animationend', () => {
+      car.style.animationPlayState = 'paused'; // Приостанавливаем анимацию
         car.style.animationName = 'none';
       }); 
+     const {velocity} = await engineMode(id, engineStatus.STARTED)
      setMoveAnimation(car, calcDuration(velocity))
+     checkDriveById(id)
     }
 }
 
@@ -53,3 +56,39 @@ export const moveCarById = async (id: number) => {
 export const calcDuration = (velocity: number, distance: number = 100): number => {
       return (distance /(velocity * 2)) * 10;
 }
+
+
+export const makeWinnersFullInfoList = (winners: IWinner[], cars: ICar[]): IWinnerFullInfo[] => {
+  const arr: IWinnerFullInfo[] = [];
+  winners.forEach(el => {
+      const car = cars.find(c => c.id === el.id);
+      if(car)
+      arr.push({id: car.id, color: car.color, name: car.name, wins: el.wins, time: el.time});
+  })
+  return arr
+}
+
+export const checkDrive = async (cars : ICar[]) => {
+  for(const car of cars){
+    const res = await engineMode(car.id, engineStatus.DRIVE)
+    if(res == 500){
+        const div = document.getElementById(car.id+"")
+        if(div){
+          div.style.animationPlayState = 'paused';
+          engineMode(car.id, engineStatus.STOPPED)          
+        }
+    }
+  }
+}
+
+
+export const checkDriveById = async(id: number) => {
+    const res = await engineMode(id, engineStatus.DRIVE)
+    if(res === 500){
+      const div = document.getElementById(id+"")
+        if(div)
+          div.style.animationPlayState = 'paused';
+          engineMode(id, engineStatus.STOPPED)          
+        }
+    }
+

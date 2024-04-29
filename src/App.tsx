@@ -3,7 +3,7 @@ import './App.css';
 import { createCar, createWinner, engineMode, getAllCars, getAllWinners, getCarById, removeCar, removeWinner, updateWinner} from './service/service';
 import { ICar, IRaceWinner, IWinner } from './interfaces';
 import Car from './components/Car/Car';
-import { calcDuration, generateRandomCars, moveCarById, setMoveAnimation, stopAnimation } from './service/localService';
+import { calcDuration, checkDrive, generateRandomCars, moveCarById, setMoveAnimation, stopAnimation } from './service/localService';
 import WinnersPage from './components/Winners/Winners';
 import axios from 'axios';
 import { engineStatus } from './values';
@@ -114,20 +114,18 @@ function App() {
 
   return (
     <div className='container'>
-      { showWinnersPage ? <WinnersPage cars={cars} winners={winnersList} show={showWinnersPage} setShow={setShowWinnersPage}></WinnersPage> : null}
+      <WinnersPage cars={cars} winners={winnersList} show={showWinnersPage} setShow={setShowWinnersPage}></WinnersPage>
       { showWinnerInfo && raceWinner ? <WinnerInfoWindow winner={raceWinner} setShow={setShowWinnerInfo}></WinnerInfoWindow> : null}
       { showEditModal && carToEdit ? <EditWindow fetchCars={fetchCars} car={carToEdit} setShow={setShowEditModal}></EditWindow> : null}
       <div className="header">
         <div className="header-panel">
           <div className="header-panel-left-div">
 
-            <div className="create-car-div">
               <div className='header-inputs'>
                 <input className="name-input" value={createCarName} onChange={e => setCreateCarName(e.target.value)} placeholder='Add car name'></input>
-                <input className='color-input' type='color' value={createCarColor} onChange={e => setCreateCarColor(e.target.value)}></input>
+                <input style={{borderColor: createCarColor}} className='color-input' type='color' value={createCarColor} onChange={e => setCreateCarColor(e.target.value)}></input>
               </div>
             <button onClick={handleOnCreateCarClick}>Create Car</button>
-            </div>
             
             <button onClick={handleOnGenerateClick}>Generate 100 cars</button>
           </div>
@@ -165,14 +163,13 @@ function App() {
                       <button onClick={() => handleOnDriveButtonClick(el.id)}>D</button>
                       <button onClick={() => handleOnStopButtonClick(el.id)}>S</button>
                     </div>
-                    <div style={{color: el.color}} className='car-name'>
+                    <div className='car-name'>
                       {el.name}
                     </div>
-                  <div className="finish">
+                  <div style={{borderColor: el.color}} className="finish">
                     <div className="finish-text">
                       FINISH
                     </div>
-                    
                   </div>
                   </div>
                   
@@ -221,18 +218,3 @@ async function moveCarsById(cars: ICar[], setRaceWinner: Dispatch<SetStateAction
 
 
 
-const checkDrive = async (cars : ICar[]) => {
-    for(const car of cars){
-      const res = await engineMode(car.id, engineStatus.DRIVE)
-      console.log( "RESSSSSS" + " " + res)
-      if(res == 500){
-          const div = document.getElementById(car.id+"")
-          if(div){
-            div.style.animationPlayState = 'paused'; // Приостанавливаем анимацию
-            // div.style.animationName = "none"
-            engineMode(car.id, engineStatus.STOPPED)          
-            console.log("allee")
-          }
-      }
-    }
-}
