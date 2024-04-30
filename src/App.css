@@ -34,14 +34,14 @@
   top: 50%;
   transform: translate(-50%,-50%);
   color: white;
-  font-size: 32px;
+  font-size: calc(16px + (32 - 16) * ((100vw - 500px) / (1440 - 500)));;;
   text-shadow: 0 0 10px 5px white;
 
 }
 .finish {
-  display: flex; /* Используем flexbox для центрирования содержимого */
-  justify-content: center; /* Центрируем содержимое по горизонтали */
-  align-items: center; /* Центрируем содержимое по вертикали */
+  display: flex; 
+  justify-content: center; 
+  align-items: center; 
   box-sizing: border-box;
   width: 128px;
   height: 100px;
@@ -50,9 +50,9 @@
 }
 
 .finish-text {
-  transform: rotate(90deg); /* Поворачиваем текст */
-  text-align: center; /* Выравниваем текст по центру */
-  color: white; /* Цвет текста */
+  transform: rotate(90deg); 
+  text-align: center; 
+  color: white; 
   font-size: 24px;
 }
 
@@ -67,7 +67,7 @@
 .cars-amount-text{
     margin: 0;
     font-size: 72px;
-      
+    text-align: center;  
 }
 
 .total-cars-text{
@@ -100,27 +100,29 @@
   width: max-content;
 }
 
-.header-panel-right-div{
+.header-panel-div{
   width: 45%;
   display: flex;
   align-items: center;
   justify-content: space-around;
 }
 
-.header-panel-left-div{
-  width: 45%;
+@media screen and (max-width: 1400px) {
+ 
+  .header-panel-div{
+    flex-direction: column;
+  }
+   
+  }
+
+.flex{
   display: flex;
-  align-items: center;
-  justify-content: space-around;
 }
-
-
 
 .create-car-div{
   display: flex;
   justify-content: space-around;
   align-items: center;
-  /* flex-direction: column; */
   height: 100%;
 }
 
@@ -131,7 +133,7 @@
   border: 0;
   margin-right: 10px;
   height: 25px;
-
+  width: calc(100px + (200 - 100) * ((100vw - 500px) / (1440 - 500)));
 }
 
 .color-input{

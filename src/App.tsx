@@ -103,17 +103,15 @@ function App() {
       { showEditModal && carToEdit ? <EditWindow fetchCars={fetchCars} car={carToEdit} setShow={setShowEditModal}></EditWindow> : null}
       <div className="header">
         <div className="header-panel">
-          <div className="header-panel-left-div">
-
-              <div className='header-inputs'>
-                <input className="name-input" value={createCarName} onChange={e => setCreateCarName(e.target.value)} placeholder='Add car name'></input>
-                <input style={{borderColor: createCarColor}} className='color-input' type='color' value={createCarColor} onChange={e => setCreateCarColor(e.target.value)}></input>
-              </div>
-            <button onClick={handleOnCreateCarClick}>Create Car</button>
-            
-            <button onClick={handleOnGenerateClick}>Generate 100 cars</button>
+          <div className="header-panel-div">
+                <div className='header-inputs'>
+                  <input className="name-input" value={createCarName} onChange={e => setCreateCarName(e.target.value)} placeholder='Add car name'></input>
+                  <input style={{borderColor: createCarColor}} className='color-input' type='color' value={createCarColor} onChange={e => setCreateCarColor(e.target.value)}></input>
+                </div>
+                <button onClick={handleOnCreateCarClick}>Create Car</button>
+            <button onClick={handleOnGenerateClick}>Generate 100</button>
           </div>
-          <div className="header-panel-right-div">
+          <div className="header-panel-div">
             <button disabled={raceOn} className={`__green-button ${raceOn && "disabled-button"}`} onClick={handleOnRaceButtonClick}>RACE</button>
             <button onClick={() => handleResetButtonClick()}>Reset</button>
           <button className="winners-button"onClick={() => setShowWinnersPage(true)}>Winners</button>

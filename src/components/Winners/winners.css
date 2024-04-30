@@ -42,6 +42,13 @@
     margin-left: 10px;
 }
 
+.winners-text{
+    margin-top: auto;
+    margin-bottom: auto;
+    height: max-content;
+    
+}
+
 th{
     background-color: white;
     color: black;

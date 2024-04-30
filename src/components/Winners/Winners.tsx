@@ -46,7 +46,7 @@ const WinnersPage:FC<IWinnersPageProps> = ({show, setShow, winners, cars}) => {
         <div style={{display: show ? "block" : 'none'}} className="container winners-page">
             <div className="header">
                 <div className="header-panel">
-                    <div className="header-panel-left-div">
+                    <div className="header-panel-div">
                         <div>
                             Sort by:
                             <select className="sort-select" value={sort} onChange={(e) => setSort(e.target.value)}>
@@ -58,10 +58,10 @@ const WinnersPage:FC<IWinnersPageProps> = ({show, setShow, winners, cars}) => {
                             </select>
                         </div>
                     </div>
-                    <h1 className="">
+                    <h1 className="winners-text">
                         Winners
                     </h1>
-                    <div className="header-panel-right-div">
+                    <div className="header-panel-div">
                     <button onClick={() => setShow(false)}>Garage</button>
                     </div>
                 </div>
