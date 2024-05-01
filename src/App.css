@@ -62,7 +62,7 @@
 
 .cars-amount-text {
   margin: 0;
-  font-size: 72px;
+  font-size: calc(64px + (72 - 64) * ((100vw - 500px) / (1440 - 500)));
   text-align: center;
 }
 
@@ -92,8 +92,7 @@
   border-radius: 8px;
   font-size: 14px;
   height: 30px;
-  min-width: 90px;
-  width: max-content;
+  width: 110px;
 }
 
 .header-panel-div {
@@ -127,7 +126,8 @@
   border: 0;
   margin-right: 10px;
   height: 25px;
-  width: calc(100px + (200 - 100) * ((100vw - 500px) / (1440 - 500)));
+  width: calc(100px + (150 - 100) * ((100vw - 500px) / (1440 - 500)));
+  max-width: 200px;
 }
 
 .color-input {
