@@ -1,66 +1,65 @@
-.winners-page{
-    position: absolute;
-    z-index: 1000;
+.winners-page {
+  position: absolute;
+  z-index: 1000;
 }
-.winners-table{
-    width: 90%;
-    margin-left: auto;
-    margin-right: auto;
-    border-collapse: collapse;
-}
-
-.winners-table td{
-    text-align: center;
-    height: 30px;
-    
+.winners-table {
+  width: 90%;
+  margin-left: auto;
+  margin-right: auto;
+  border-collapse: collapse;
 }
 
-.winners-table tr{
-    height: 30px;
-    border-bottom: 2px solid white;
+.winners-table td {
+  text-align: center;
+  height: 30px;
 }
 
-.color-show{
-    height: 30px;
-    width: 60px;
-    margin-left: auto;
-    margin-right: auto;
+.winners-table tr {
+  height: 30px;
+  border-bottom: 2px solid white;
 }
 
-.winners-table-row{
-    border-bottom: 1px solid white;
+.color-show {
+  height: 30px;
+  width: 60px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
-.winners-table-car{
-    height: 50px;
-    width: 128px;
-    margin-left: auto;
-    margin-right: auto;
+.winners-table-row {
+  border-bottom: 1px solid white;
 }
 
-.sort-select{
-    margin-left: 10px;
+.winners-table-car {
+  height: 50px;
+  width: 128px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
-.winners-text{
-    margin-top: auto;
-    margin-bottom: auto;
-    height: max-content;
-    
+.sort-select {
+  margin-left: 10px;
 }
 
-th{
-    background-color: white;
-    color: black;
+.winners-text {
+  margin-top: auto;
+  margin-bottom: auto;
+  height: max-content;
 }
 
-td, th {
-    height: 50px;
-    border-bottom: 1px solid rgba(255, 255, 255, 1);
-    padding: 4px;
-  }
-  
-td:hover, th:hover {
-    border-color: rgba(255, 255, 255, 0.8);
+th {
+  background-color: white;
+  color: black;
+}
 
-  }
+td,
+th {
+  height: 50px;
+  border-bottom: 1px solid rgba(255, 255, 255, 1);
+  padding: 4px;
+}
+
+td:hover,
+th:hover {
+  border-color: rgba(255, 255, 255, 0.8);
+}
