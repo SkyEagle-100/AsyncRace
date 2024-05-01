@@ -1,6 +1,6 @@
 EPAM JS Internship Practical Task "Async Race"
 
-Total Points: 350
+Total Points: 370
 
 Prettier automatically formats the code after every save
 
